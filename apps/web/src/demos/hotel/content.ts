@@ -1,0 +1,81 @@
+import type { DemoLang } from "../config";
+
+const en = {
+  brand: "SAHA",
+  brandSub: "A boutique stay",
+  nav: ["Our rooms", "Slow moments", "Your stay"],
+  reserve: "Plan your stay",
+  eyebrow: "A quieter corner of Baghdad",
+  title: "Arrive curious.",
+  titleAccent: "Leave restored.",
+  intro: "Behind the arches, a slower rhythm. An intimate house of warm light, thoughtful details, and mornings worth lingering over.",
+  explore: "Discover the rooms",
+  heroCaption: "A house with a little soul.",
+  heroNote: "Architecture imagined for the SAHA collection",
+  artLabel: "Illustration of a boutique hotel courtyard with tall arches, palms, and a reflecting pool",
+  welcome: "Stay a little closer to what matters.",
+  welcomeText: "A book in the courtyard. Breakfast without a rush. A room that feels entirely your own. We believe the memorable things are often the simple ones.",
+  signatures: ["Intimate by design", "Breakfast included", "A courtyard to unwind"],
+  roomsEyebrow: "Rooms with character",
+  roomsTitle: "Find your own little sanctuary.",
+  roomsText: "Three ways to settle in. Each room pairs generous comfort with its own view of the house.",
+  perNight: "per night",
+  currency: "IQD",
+  choose: "Choose this room",
+  selected: "Selected room",
+  roomArt: "Illustrated room interior with an arched window, upholstered bed, and warm lighting",
+  rooms: [
+    { id: "courtyard", name: "The Courtyard Room", description: "Soft linen, morning light, and a quiet view into the heart of the house.", size: "28 m² · Two guests", feature: "Queen bed · Courtyard view", price: 145000 },
+    { id: "terrace", name: "The Terrace Room", description: "Your own open-air corner for a slow coffee and the last light of the day.", size: "36 m² · Two guests", feature: "King bed · Private terrace", price: 195000 },
+    { id: "suite", name: "The Saha Suite", description: "A little more room to make yourself at home, with a separate space to read and unwind.", size: "52 m² · Two guests", feature: "King bed · Private lounge", price: 275000 },
+  ],
+  experiencesEyebrow: "The art of taking your time",
+  experiencesTitle: "No itinerary required.",
+  experiences: [
+    { title: "Mornings, made slowly", text: "Fresh bread, seasonal plates, and a second cup of coffee in the courtyard.", detail: "Breakfast in the courtyard" },
+    { title: "A city beyond the door", text: "Independent galleries, riverside walks, and local addresses chosen with care.", detail: "A personal neighborhood guide" },
+    { title: "One last golden hour", text: "Find a quiet seat on the terrace as the house settles into the evening.", detail: "Evenings on the terrace" },
+  ],
+  bookingEyebrow: "Make room for a pause",
+  bookingTitle: "Your stay begins here.",
+  bookingText: "Explore a room and the length of your stay. This preview calculates an illustrative total and lets you try the booking experience.",
+  roomLabel: "Your room", nightsLabel: "Number of nights", arrivalLabel: "Arrival date", nameLabel: "Full name", emailLabel: "Email address",
+  estimate: "Estimated stay total", includes: "Room and breakfast included. Illustrative prices; no payment is taken.",
+  submit: "Try the reservation", demoNote: "Demo only. No availability check or real reservation.",
+  successTitle: "Your sample stay is ready.", successText: "This was a preview of the booking experience. No reservation was sent and no payment was made.", again: "Plan another stay",
+  footerLine: "A little stillness. A lasting impression.", location: "Baghdad, Iraq · A fictional boutique hotel", footerNote: "A concept website by DevsHub.cc. All rooms, rates, and experiences are illustrative.", top: "Back to top", skip: "Skip to main content",
+};
+
+export type HotelContent = typeof en;
+
+const ar: HotelContent = {
+  brand: "سَها", brandSub: "إقامة بطابع خاص",
+  nav: ["غرفنا", "لحظات على مهل", "إقامتك"], reserve: "خطّط لإقامتك",
+  eyebrow: "ركن أكثر هدوءاً في بغداد", title: "تعال بشغف.", titleAccent: "وارحل بصفاء.",
+  intro: "خلف الأقواس، للحياة إيقاع أهدأ. بيت صغير يملؤه الضوء الدافئ والتفاصيل المدروسة، وصباح يستحق أن تتمهّل فيه.",
+  explore: "اكتشف الغرف", heroCaption: "بيت له روح.", heroNote: "تصوّر معماري لمجموعة سَها",
+  artLabel: "رسم لفناء فندق صغير بأقواس عالية ونخيل وحوض ماء عاكس",
+  welcome: "اقترب قليلاً ممّا يستحق.", welcomeText: "كتاب في الفناء. إفطار بلا عجلة. وغرفة تشعر أنها لك وحدك. نؤمن أن التفاصيل البسيطة هي ما يبقى في الذاكرة.",
+  signatures: ["خصوصية بتصميم مدروس", "الإفطار مشمول", "فناء تستعيد فيه هدوءك"],
+  roomsEyebrow: "غرف لكل منها حكاية", roomsTitle: "اعثر على ركنك الهادئ.", roomsText: "ثلاث طرق لتشعر بأنك في بيتك. تجمع كل غرفة الراحة الواسعة بإطلالة خاصة على المكان.",
+  perNight: "لليلة الواحدة", currency: "د.ع", choose: "اختر هذه الغرفة", selected: "الغرفة المختارة",
+  roomArt: "رسم لغرفة بنافذة مقوّسة وسرير منجّد وإضاءة دافئة",
+  rooms: [
+    { id: "courtyard", name: "غرفة الفناء", description: "أقمشة ناعمة وضوء صباحي وإطلالة هادئة على قلب البيت.", size: "٢٨ متراً مربعاً · ضيفان", feature: "سرير مزدوج · إطلالة على الفناء", price: 145000 },
+    { id: "terrace", name: "غرفة الشرفة", description: "ركنك الخاص في الهواء الطلق، لقهوة على مهل وآخر خيوط النهار.", size: "٣٦ متراً مربعاً · ضيفان", feature: "سرير كبير · شرفة خاصة", price: 195000 },
+    { id: "suite", name: "جناح سَها", description: "مساحة أوسع تشعرك بالألفة، مع ركن مستقل للقراءة والاسترخاء.", size: "٥٢ متراً مربعاً · ضيفان", feature: "سرير كبير · صالة خاصة", price: 275000 },
+  ],
+  experiencesEyebrow: "فنّ التمهّل", experiencesTitle: "لا تحتاج إلى جدول.",
+  experiences: [
+    { title: "صباح على مهل", text: "خبز طازج وأطباق موسمية وفنجان قهوة آخر في الفناء.", detail: "إفطار في الفناء" },
+    { title: "مدينة خلف الباب", text: "معارض مستقلة ومشي بجانب النهر وعناوين محلية اخترناها بعناية.", detail: "دليل شخصي لاكتشاف الحي" },
+    { title: "آخر ضوء ذهبي", text: "اختر مقعداً هادئاً على الشرفة، واترك البيت يستقبل المساء.", detail: "أمسيات على الشرفة" },
+  ],
+  bookingEyebrow: "اترك مساحة للراحة", bookingTitle: "إقامتك تبدأ هنا.", bookingText: "اختر غرفتك وعدد الليالي. تعرّف على التكلفة التوضيحية وجرّب خطوات الحجز في هذا النموذج.",
+  roomLabel: "غرفتك", nightsLabel: "عدد الليالي", arrivalLabel: "تاريخ الوصول", nameLabel: "الاسم الكامل", emailLabel: "البريد الإلكتروني",
+  estimate: "التكلفة التقديرية للإقامة", includes: "الغرفة والإفطار مشمولان. الأسعار للتوضيح فقط ولا تُحصّل أي دفعة.", submit: "جرّب طلب الحجز", demoNote: "عرض تجريبي فقط. لا يتحقق من التوفر ولا ينشئ حجزاً حقيقياً.",
+  successTitle: "إقامتك التجريبية جاهزة.", successText: "هذه معاينة لتجربة الحجز. لم يُرسل حجز ولم تُحصّل أي دفعة.", again: "خطّط لإقامة أخرى",
+  footerLine: "قليل من الهدوء. وأثر يبقى.", location: "بغداد، العراق · فندق خيالي بطابع خاص", footerNote: "تصوّر لموقع من ديفس هاب. جميع الغرف والأسعار والتجارب للتوضيح فقط.", top: "العودة إلى الأعلى", skip: "انتقل إلى المحتوى الرئيسي",
+};
+
+export const hotelContent: Record<DemoLang, HotelContent> = { ar, en };

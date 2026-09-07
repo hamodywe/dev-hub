@@ -75,7 +75,7 @@ try {
     assertPublishable(a.translations);
   }
   for (const [table, expected] of [
-    ['projects', 20],
+    ['projects', 23],
     ['services', 6],
   ]) {
     const rows = (await pool.query(`SELECT * FROM ${table}`)).rows;
@@ -105,6 +105,9 @@ try {
     'template-gym',
     'template-appliances',
     'template-phones',
+    'template-academy',
+    'template-hotel',
+    'template-architecture',
   ];
   assert.deepEqual(
     (
@@ -122,7 +125,7 @@ try {
     ).rows.every((project) => project.client_en.trim()),
     'Every fresh template has an English client label',
   );
-  assert.equal(settings.seedVersion, 4);
+  assert.equal(settings.seedVersion, 5);
   assert.equal(
     (await pool.query('SELECT count(*)::int n FROM task_stages')).rows[0].n,
     3,
@@ -139,7 +142,7 @@ try {
     .rows;
   assert.deepEqual(
     markers.map((m) => m.key),
-    ['legacy-demo-v2', 'template-sites-v3', 'template-sites-v4'],
+    ['legacy-demo-v2', 'template-sites-v3', 'template-sites-v4', 'template-sites-v5'],
   );
   await pool.query('DELETE FROM projects');
   await boot();
@@ -153,7 +156,7 @@ try {
     markers,
   );
   console.log(
-    'PASS: clean install applies all migrations, initializes an active owner, company profiles/founder translations/contact defaults, 4 published trilingual articles, 9 portfolio + 11 template projects, 6 services, 3 task stages and durable release markers; deleting all projects survives restart.',
+    'PASS: clean install applies all migrations, initializes an active owner, company profiles/founder translations/contact defaults, 4 published trilingual articles, 9 portfolio + 14 template projects, 6 services, 3 task stages and durable release markers; deleting all projects survives restart.',
   );
 } finally {
   await pool.end();

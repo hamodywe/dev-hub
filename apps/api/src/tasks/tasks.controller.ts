@@ -15,12 +15,13 @@ import {
   ConflictException,
   NotFoundException,
 } from '@nestjs/common';
-import { and, asc, eq, inArray, sql } from 'drizzle-orm';
+import { and, asc, count, eq, inArray, sql } from 'drizzle-orm';
 import { DbService } from '../db/db.service.js';
 import { tasks, taskStages, taskComments, users } from '../db/schema.js';
 import { JwtAuthGuard } from '../auth/jwt.guard.js';
 import { RequirePermissions } from '../auth/permissions.js';
-import { object, str, int, bool, nonEmpty } from '../common/input.js';
+import { object, str, int, nonEmpty } from '../common/input.js';
+import { taskInput } from './tasks.input.js';
 
 const profileFields = {
   id: users.id,
@@ -177,7 +178,7 @@ export class TasksController {
   @Post()
   @RequirePermissions('tasks:write')
   create(@Req() req: any, @Body() body: unknown) {
-    return this.save(req.user.id, undefined, this.taskInput(body, true));
+    return this.save(req.user.id, undefined, taskInput(body, true));
   }
   @Get(':id/comments')
   @RequirePermissions('tasks:read')
@@ -236,7 +237,7 @@ export class TasksController {
     @Param('id', ParseIntPipe) id: number,
     @Body() body: unknown,
   ) {
-    return this.save(req.user.id, id, this.taskInput(body, false));
+    return this.save(req.user.id, id, taskInput(body, false));
   }
   @Patch(':id')
   @RequirePermissions('tasks:write')
@@ -276,29 +277,6 @@ export class TasksController {
     nonEmpty(d);
     return d;
   }
-  private taskInput(body: unknown, create: boolean) {
-    const raw = object(body, [
-      'title',
-      'description',
-      'stageId',
-      'assigneeId',
-      'sortOrder',
-      'archived',
-    ]);
-    const d: Record<string, any> = {};
-    if (raw.title !== undefined) d.title = str(raw.title, 200, true);
-    if (raw.description !== undefined)
-      d.description = str(raw.description, 20000);
-    if (raw.stageId !== undefined) d.stageId = int(raw.stageId, 1);
-    if (raw.assigneeId !== undefined)
-      d.assigneeId = raw.assigneeId === null ? null : int(raw.assigneeId, 1);
-    if (raw.sortOrder !== undefined) d.sortOrder = int(raw.sortOrder);
-    if (raw.archived !== undefined) d.archived = bool(raw.archived);
-    if (create && (!d.title || !d.stageId))
-      throw new BadRequestException('Title and stageId are required');
-    nonEmpty(d);
-    return d;
-  }
   private async orderStages(tx: Tx, ids: number[]) {
     for (const [i, id] of ids.entries())
       await tx
@@ -323,13 +301,27 @@ export class TasksController {
         ),
       ),
     ];
-    const people = await this.dbs.db
-      .select(profileFields)
-      .from(users)
-      .where(inArray(users.id, ids));
+    const [people, counts] = await Promise.all([
+      this.dbs.db
+        .select(profileFields)
+        .from(users)
+        .where(inArray(users.id, ids)),
+      this.dbs.db
+        .select({ taskId: taskComments.taskId, count: count() })
+        .from(taskComments)
+        .where(
+          inArray(
+            taskComments.taskId,
+            rows.map((r) => r.id),
+          ),
+        )
+        .groupBy(taskComments.taskId),
+    ]);
     const map = new Map(people.map((p) => [p.id, p]));
+    const commentCounts = new Map(counts.map((c) => [c.taskId, c.count]));
     return rows.map((r) => ({
       ...r,
+      commentCount: commentCounts.get(r.id) ?? 0,
       assignee: r.assigneeId ? (map.get(r.assigneeId) ?? null) : null,
       createdBy: map.get(r.createdById),
     }));

@@ -38,6 +38,7 @@ const additionalTemplates = [
   'template-appliances',
   'template-phones',
 ];
+const sectorTemplates = ['template-academy', 'template-hotel', 'template-architecture'];
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 const temp = await mkdtemp('dist/review-template-upgrade-');
 try {
@@ -90,6 +91,7 @@ try {
     { version: 3, markerPresent: false },
     { version: 3, markerPresent: true },
     { version: 4, markerPresent: false },
+    { version: 5, markerPresent: false },
     { version: 3, markerPresent: false, emptyProjects: true },
   ]) {
     // Only the already-verified disposable DB is reset between independent cases.
@@ -222,12 +224,12 @@ try {
     );
     assert.deepEqual(
       await settingsData(),
-      { ...customSettings, seedVersion: 4 },
+      { ...customSettings, seedVersion: 5 },
       'Only seedVersion may change during this upgrade',
     );
     assert.deepEqual(
       (await markerRows()).map((m) => m.key),
-      ['legacy-demo-v2', 'template-sites-v3', 'template-sites-v4'],
+      ['legacy-demo-v2', 'template-sites-v3', 'template-sites-v4', 'template-sites-v5'],
     );
 
     const additions = upgradedProjects.filter(
@@ -235,8 +237,8 @@ try {
     );
     assert.deepEqual(
       additions.map((p) => p.slug).sort(),
-      scenario.version === 3 ? [...additionalTemplates].sort() : [],
-      'Only the five new templates are added to v3; v4 deletions remain deleted',
+      [...(scenario.version === 3 ? additionalTemplates : []), ...(scenario.version < 5 ? sectorTemplates : [])].sort(),
+      'Only unapplied template releases are added; v4 and v5 deletions remain deleted',
     );
     if (scenario.version === 3) {
       for (const slug of additionalTemplates) {
@@ -285,7 +287,7 @@ try {
     assert.deepEqual(
       await projectRows(),
       [],
-      'Deleting all projects after v4 must never re-trigger default or template seeds',
+      'Deleting all projects after v5 must never re-trigger default or template seeds',
     );
     assert.deepEqual(await settingsData(), afterSave);
     assert.deepEqual(await userRows(), existingUsers);

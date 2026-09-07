@@ -27,6 +27,9 @@ import { gymContent } from "../src/demos/gym/content.ts";
 import { appliancesContent } from "../src/demos/appliances/content.ts";
 import { phonesContent } from "../src/demos/phones/content.ts";
 import "../src/demos/clinic-nawa/clinic.test.mjs";
+import { academyContent } from "../src/demos/academy/content.ts";
+import { hotelContent } from "../src/demos/hotel/content.ts";
+import { architectureContent } from "../src/demos/architecture/content.ts";
 import { demosCopy } from "../src/i18n/demos.ts";
 import { LOCALES } from "../src/i18n/config.ts";
 // API ESM imports use .js in production; read their sibling TypeScript seed files in this source test.
@@ -63,6 +66,9 @@ const CONTENT = {
   gym: gymContent,
   appliances: appliancesContent,
   phones: phonesContent,
+  academy: academyContent,
+  hotel: hotelContent,
+  architecture: architectureContent,
 };
 
 /** Structural shape of a content tree: same keys, same array lengths, same leaf types. */
@@ -474,7 +480,7 @@ test("portfolio template seeds reference registered demos and localized covers",
   assert.deepEqual(
     TEMPLATE_SLUGS.map((slug) => slug.replace(/^template-/, "")).sort(),
     [...DEMO_SLUGS].sort(),
-    "each of the eleven demos has a portfolio entry",
+    "each registered demo has a portfolio entry",
   );
   for (const project of TEMPLATE_PROJECTS) {
     const slug = project.slug.replace(/^template-/, "");

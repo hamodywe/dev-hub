@@ -37,6 +37,9 @@ const THEME_COLOR: Record<DemoSlug, string> = {
   gym: "#101715",
   appliances: "#224d3d",
   phones: "#6550c7",
+  academy: "#f7f4e8",
+  hotel: "#44242b",
+  architecture: "#f4f3ef",
 };
 
 export async function generateMetadata({

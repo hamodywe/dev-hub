@@ -43,6 +43,13 @@
       "when": 1788796802000,
       "tag": "0005_template_client_translation",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1788796803000,
+      "tag": "0006_task_details",
+      "breakpoints": true
     }
   ]
 }

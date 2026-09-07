@@ -17,6 +17,10 @@ import { GymSite } from "@/demos/gym/Site";
 import { AppliancesSite } from "@/demos/appliances/Site";
 import { PhonesSite } from "@/demos/phones/Site";
 
+import { AcademySite } from "@/demos/academy/Site";
+import { HotelSite } from "@/demos/hotel/Site";
+import { ArchitectureSite } from "@/demos/architecture/Site";
+
 const SITES: Record<DemoSlug, (props: { lang: DemoLang }) => React.ReactNode> =
   {
     company: CompanySite,
@@ -30,6 +34,9 @@ const SITES: Record<DemoSlug, (props: { lang: DemoLang }) => React.ReactNode> =
     gym: GymSite,
     appliances: AppliancesSite,
     phones: PhonesSite,
+    academy: AcademySite,
+    hotel: HotelSite,
+    architecture: ArchitectureSite,
   };
 
 export default async function DemoPage({

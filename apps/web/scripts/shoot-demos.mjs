@@ -67,7 +67,7 @@ try {
       });
       // Hide the floating DevsHub toolbar so covers show only the template.
       await page.addStyleTag({
-        content: "[role=region][aria-label*='DevsHub']{display:none!important}",
+        content: "[role=region][aria-label*='DevsHub'],nextjs-portal{display:none!important}",
       });
       if (full) {
         // Scroll through so every whileInView reveal has fired before capturing, and force

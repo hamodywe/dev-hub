@@ -17,6 +17,9 @@ export const DEMO_SLUGS = [
   "gym",
   "appliances",
   "phones",
+  "academy",
+  "hotel",
+  "architecture",
 ] as const;
 export type DemoSlug = (typeof DEMO_SLUGS)[number];
 
@@ -379,6 +382,42 @@ export const DEMO_SITES: readonly DemoSite[] = [
     },
     accent: "#6550C7",
     palette: ["#F4F3F7", "#6550C7", "#181821"],
+  },
+  {
+    slug: "academy",
+    name: { ar: "فورما", en: "FORMA", ckb: "فۆرما" },
+    kind: { ar: "أكاديمية ودورات", en: "Academy & courses", ckb: "ئەکادیمیا و خول" },
+    tagline: {
+      ar: "مدرسة باوهاوس مرحة بألوان أساسية وأشكال هندسية: دورات بفلاتر، مسارات تعلم، وتجربة تسجيل.",
+      en: "A playful Bauhaus academy with primary colours and geometric forms: filterable courses, learning paths, and demo enrollment.",
+      ckb: "ئەکادیمیایەکی ڕەنگاوڕەنگ بە شێوازی باوهاوس: خولەکان بەپێی بابەت بپاڵێوە و تۆمارکردن تاقی بکەرەوە.",
+    },
+    features: { ar: ["فلاتر الدورات", "مسارات تعلم", "اختيار الدورة", "تسجيل تجريبي"], en: ["Course filters", "Learning paths", "Course selection", "Demo enrollment"], ckb: ["پاڵاوتنی خول", "ڕێگای فێربوون", "هەڵبژاردنی خول", "تۆمارکردنی نموونەیی"] },
+    accent: "#EF6043", palette: ["#F7F4E8", "#EF6043", "#4267D5"],
+  },
+  {
+    slug: "hotel",
+    name: { ar: "سَها", en: "SAHA", ckb: "سەها" },
+    kind: { ar: "فندق بوتيك", en: "Boutique hotel", ckb: "هۆتێلی بۆتیک" },
+    tagline: {
+      ar: "ضيافة بطابع آرت ديكو مع أقواس هندسية وألوان كريمية ونبيذية: غرف وتجارب وحساب الإقامة وطلب حجز تجريبي.",
+      en: "Art Deco hospitality in cream and wine, with architectural arches: rooms, experiences, a stay calculator, and demo booking.",
+      ckb: "میوانداری بە شێوازی ئارت دیکۆ و ڕەنگی کرێمی: ژوورەکان، ئەزموونەکان و هەژمارکردنی مانەوە و حیجزی نموونەیی.",
+    },
+    features: { ar: ["استعراض الغرف", "اختيار الإقامة", "حساب الليالي", "حجز تجريبي"], en: ["Room collection", "Stay selection", "Night calculator", "Demo reservation"], ckb: ["ژوورەکان", "هەڵبژاردنی مانەوە", "هەژماری شەوان", "حیجزی نموونەیی"] },
+    accent: "#8B6541", palette: ["#F7F1E5", "#44242B", "#8B6541"],
+  },
+  {
+    slug: "architecture",
+    name: { ar: "محور", en: "AXIS", ckb: "تەوەر" },
+    kind: { ar: "عمارة وتصميم داخلي", en: "Architecture & interiors", ckb: "تەلارسازی و دیزاینی ناوەوە" },
+    tagline: {
+      ar: "بساطة سويسرية بخطوط دقيقة وفراغات واسعة: مشاريع بفلاتر، دراسات معمارية متعددة الزوايا، واستفسار عن مشروع.",
+      en: "Swiss minimalism with precise typography and generous space: filtered projects, architectural studies with three views, and inquiries.",
+      ckb: "سادەیی سویسری بە فۆنتی ڕوون و بۆشایی فراوان: پاڵاوتنی پڕۆژە و سێ دیمەنی تەلارسازی و فۆڕمی پرسیار.",
+    },
+    features: { ar: ["فلاتر المشاريع", "واجهة وداخل ومخطط", "تفاصيل الخامات", "استفسار تجريبي"], en: ["Project filters", "Exterior, interior & plan", "Material details", "Demo inquiry"], ckb: ["پاڵاوتنی پڕۆژە", "ڕووکار و ناوەوە و نەخشە", "وردەکاریی کەرەستە", "پرسیاری نموونەیی"] },
+    accent: "#AF452B", palette: ["#F4F3EF", "#242725", "#AF452B"],
   },
 ];
 

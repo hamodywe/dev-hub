@@ -1,6 +1,7 @@
 import type { Locale } from "@/i18n/config";
 import { demoLangFromLocale, isDemoLang, isDemoSlug } from "@/demos/config";
 import type { Project, Service, SiteSettings, TeamMember } from "./types";
+import { previewUrl } from "./preview-url";
 import defaults from "@/content/public-defaults.json";
 import defaultTeam from "@/content/team.json";
 
@@ -63,7 +64,7 @@ export function localizeProject(p: Project, locale: Locale): Project {
   const d = defaults.projects.find((entry) => entry.key === p.slug);
   return {
     ...p,
-    liveUrl: localizeDemoUrl(p.liveUrl, locale),
+    liveUrl: localizeDemoUrl(previewUrl(p.liveUrl), locale),
     coverImage: localizeDemoUrl(p.coverImage, locale),
     gallery: p.gallery
       ? [...new Set(p.gallery.map((image) => localizeDemoUrl(image, locale)))]

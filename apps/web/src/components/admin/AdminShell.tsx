@@ -247,8 +247,8 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
                 </aside>
               </div>
             )}
-            <main className="flex-1 p-4 md:p-8">
-              <div className="mx-auto max-w-6xl">
+            <main className="min-w-0 flex-1 p-4 md:p-8">
+              <div className={pathname === "/admin/tasks" ? "mx-auto w-full" : "mx-auto max-w-6xl"}>
                 {(() => {
                   const route = NAV.find(
                     (n) => n.href !== "/admin" && pathname.startsWith(n.href),

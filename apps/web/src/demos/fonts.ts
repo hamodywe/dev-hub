@@ -30,4 +30,7 @@ export const demoFontVars: Record<DemoSlug, string> = {
   gym: `${inter.variable} ${tajawal.variable}`,
   appliances: `${cormorant.variable} ${inter.variable} ${tajawal.variable}`,
   phones: `${inter.variable} ${tajawal.variable}`,
+  academy: `${inter.variable} ${tajawal.variable}`,
+  hotel: `${cormorant.variable} ${amiri.variable} ${inter.variable} ${tajawal.variable}`,
+  architecture: `${inter.variable} ${tajawal.variable}`,
 };

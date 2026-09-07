@@ -32,3 +32,12 @@ the four original articles are inserted once. Demo seeding has a durable marker
 so deleting all projects/services does not repopulate them on restart. Company
 social conversion runs only when `socialLinks` is absent, and founder defaults
 fill only missing properties, preserving custom values and explicit blanks.
+
+Migration `0006_task_details` runs automatically through the same startup migrator.
+It adds task `priority` (low/medium/high/urgent, default medium), nullable `dueDate`
+(YYYY-MM-DD), and `checklist` (up to 100 unique `{ id, text, done }` items, default
+empty). Existing tasks retain their stages, ordering, archive state, and comments.
+Task list/detail/save responses also include a numeric `commentCount`. Partial
+updates leave omitted fields unchanged; use `dueDate: null` or `checklist: []` to
+clear those fields. Apply this migration before using the updated API queries;
+normal application startup already does so before it listens for requests.

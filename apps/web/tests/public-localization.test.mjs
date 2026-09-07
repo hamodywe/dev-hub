@@ -368,7 +368,7 @@ test("public contacts stay hidden when cleared and maps follow a custom address"
   assert.equal(new URL(mapUrl(address)).searchParams.get("query"), address);
 });
 
-test("all 22 portfolio demo destinations localize with matching covers and no duplicate gallery images", () => {
+test("all registered portfolio demo destinations localize with matching covers and no duplicate gallery images", () => {
   assert.deepEqual(
     TEMPLATE_PROJECTS.map(({ slug }) => slug.replace(/^template-/, "")).sort(),
     [...DEMO_SLUGS].sort(),
@@ -405,7 +405,7 @@ test("all 22 portfolio demo destinations localize with matching covers and no du
       `${slug}: localization cannot mutate saved content`,
     );
   }
-  assert.equal(destinations.size, 22);
+  assert.equal(destinations.size, TEMPLATE_PROJECTS.length * 2);
 });
 
 test("bundled preview URLs retain exact queries, anchors and trailing slashes", () => {

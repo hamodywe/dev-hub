@@ -14,12 +14,13 @@ The API calls Drizzle's migrator during `DbService.onModuleInit`, before accepti
 | 4 | `0003_cms_workspace.sql` | Account roles, permissions, active state and token versions; English project clients; service visibility; articles, task stages, tasks and comments; durable seed marker |
 | 5 | `0004_company_socials.sql` | One-time legacy company social-link conversion and missing localized founder names/GitHub links |
 | 6 | `0005_template_client_translation.sql` | English default client label for the six recognized upstream templates, preserving custom clients/translations |
+| 7 | `0006_task_details.sql` | Task priority, optional calendar due date and bounded checklist data |
 
 `0003` upgrades every existing user to `owner`, sets its display name from its username, and leaves the existing username and `password_hash` untouched. New accounts default to `admin`. Review owner access after migration. `ADMIN_USER` and `ADMIN_PASSWORD` only bootstrap an empty users table; environment changes do not reset existing accounts.
 
 `0003` imports the four initial articles once. The `cms_seed_runs` marker prevents a normal restart from restoring deleted demo projects or services after their seed upgrade completes. `SEED_DEMO=false` disables demo project/service seeding and legacy seed upgrades, but does not skip SQL migrations or the initial account/settings bootstrap.
 
-`0005` only fills a blank English client when both the upstream template slug and original Arabic demo-client label match. Template releases v3 and v4 have separate durable markers; a historical seed version also preserves prior deletions when upgrading an older deployment. New templates appear once in Our work and can be edited, hidden or deleted through the project CMS.
+`0005` only fills a blank English client when both the upstream template slug and original Arabic demo-client label match. Template releases v3, v4 and v5 have separate durable markers; a historical seed version also preserves prior deletions when upgrading an older deployment. New templates appear once in Our work and can be edited, hidden or deleted through the project CMS.
 
 `0004` preserves an existing `socialLinks` field, including `[]` and disabled entries. For legacy fixed social fields it replaces recognized demo accounts with the company profiles while retaining custom links. Founder defaults fill missing fields; saved fields override them, including an empty GitHub link. Empty team arrays remain empty. These new migrations do not change project `live_url` or `repo_url` values.
 

@@ -224,11 +224,32 @@ const task = await request('/tasks', {
     description: 'Details',
     stageId: stageA.id,
     assigneeId: worker.id,
+    priority: 'high',
+    dueDate: '2028-02-29',
+    checklist: [{ id: 'review', text: 'Review mobile', done: false }],
   },
   expected: 201,
 });
 assert.equal(task.createdBy.id, worker.id);
 assert.equal(task.assignee.id, worker.id);
+assert.equal(task.priority, 'high');
+assert.equal(task.dueDate, '2028-02-29');
+assert.deepEqual(task.checklist, [
+  { id: 'review', text: 'Review mobile', done: false },
+]);
+assert.equal(task.commentCount, 0);
+for (const body of [
+  { priority: 'critical' },
+  { dueDate: '2026-02-30' },
+  { checklist: [{ id: 'review', text: 'Review mobile', done: 'false' }] },
+]) {
+  await request('/tasks/' + task.id, {
+    method: 'PATCH',
+    token: wt,
+    body,
+    expected: 400,
+  });
+}
 const comment = await request('/tasks/' + task.id + '/comments', {
   method: 'POST',
   token: wt,
@@ -262,6 +283,13 @@ const parallel = await Promise.all(
   ),
 );
 const board = await request('/tasks', { token: wt });
+assert.equal(board.find((t) => t.id === task.id).commentCount, 1);
+assert(
+  parallel.every(
+    (t) =>
+      t.priority === 'medium' && t.dueDate === null && t.checklist.length === 0,
+  ),
+);
 const group = board.filter((t) => t.stageId === stageA.id);
 assert.deepEqual(
   group.map((t) => t.sortOrder),
@@ -274,6 +302,22 @@ const moved = await request('/tasks/' + task.id, {
 });
 assert.equal(moved.stageId, stageB.id);
 assert.equal(moved.assignee.id, ownerId);
+assert.equal(moved.priority, 'high');
+assert.equal(moved.dueDate, '2028-02-29');
+assert.deepEqual(moved.checklist, task.checklist);
+const updatedDetails = await request('/tasks/' + task.id, {
+  method: 'PATCH',
+  token: wt,
+  body: {
+    priority: 'urgent',
+    dueDate: null,
+    checklist: [{ id: 'review', text: 'Review mobile', done: true }],
+  },
+});
+assert.equal(updatedDetails.priority, 'urgent');
+assert.equal(updatedDetails.dueDate, null);
+assert.equal(updatedDetails.checklist[0].done, true);
+assert.equal(updatedDetails.commentCount, 1);
 assert.equal(
   (await request('/tasks/' + task.id, { token: wt })).comments[0].id,
   comment.id,

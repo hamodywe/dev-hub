@@ -418,7 +418,7 @@ const DEMO_PROJECTS: (typeof projects.$inferInsert)[] = [
       'SEO',
       'i18n',
     ],
-    liveUrl: 'https://example.com',
+    liveUrl: '',
     repoUrl: '',
     coverImage: '/uploads/seed/law-site-cover.svg',
     gallery: [
@@ -458,7 +458,7 @@ const DEMO_PROJECTS: (typeof projects.$inferInsert)[] = [
       'SMS Gateway',
       'Docker',
     ],
-    liveUrl: 'https://example.com',
+    liveUrl: '',
     repoUrl: '',
     coverImage: '/uploads/seed/law-dash-cover.svg',
     gallery: [
@@ -498,7 +498,7 @@ const DEMO_PROJECTS: (typeof projects.$inferInsert)[] = [
       'MinIO',
       'SEO',
     ],
-    liveUrl: 'https://example.com',
+    liveUrl: '',
     repoUrl: '',
     coverImage: '/uploads/seed/souq-store-cover.svg',
     gallery: [
@@ -537,7 +537,7 @@ const DEMO_PROJECTS: (typeof projects.$inferInsert)[] = [
       'Recharts',
       'Docker',
     ],
-    liveUrl: 'https://example.com',
+    liveUrl: '',
     repoUrl: '',
     coverImage: '/uploads/seed/souq-admin-cover.svg',
     gallery: [
@@ -576,7 +576,7 @@ const DEMO_PROJECTS: (typeof projects.$inferInsert)[] = [
       'Push Notifications',
       'ZainCash API',
     ],
-    liveUrl: 'https://example.com',
+    liveUrl: '',
     repoUrl: '',
     coverImage: '/uploads/seed/souq-app-cover.svg',
     gallery: [
@@ -616,7 +616,7 @@ const DEMO_PROJECTS: (typeof projects.$inferInsert)[] = [
       'ZainCash API',
       'Docker',
     ],
-    liveUrl: 'https://example.com',
+    liveUrl: '',
     repoUrl: '',
     coverImage: '/uploads/seed/dijla-cover.svg',
     gallery: [
@@ -655,7 +655,7 @@ const DEMO_PROJECTS: (typeof projects.$inferInsert)[] = [
       'Push Notifications',
       'ZainCash API',
     ],
-    liveUrl: 'https://example.com',
+    liveUrl: '',
     repoUrl: '',
     coverImage: '/uploads/seed/ayadati-cover.svg',
     gallery: [
@@ -695,7 +695,7 @@ const DEMO_PROJECTS: (typeof projects.$inferInsert)[] = [
       'Docker',
       'Kubernetes',
     ],
-    liveUrl: 'https://example.com',
+    liveUrl: '',
     repoUrl: '',
     coverImage: '/uploads/seed/rawatib-cover.svg',
     gallery: [
@@ -734,7 +734,7 @@ const DEMO_PROJECTS: (typeof projects.$inferInsert)[] = [
       'ZainCash API',
       'Docker',
     ],
-    liveUrl: 'https://example.com',
+    liveUrl: '',
     repoUrl: '',
     coverImage: '/uploads/seed/kashier-cover.svg',
     gallery: [
@@ -763,7 +763,12 @@ const KNOWN_DEMO_SLUGS = new Set([
 ]);
 
 /** Version of the demo content currently shipped by this seeder. */
-const SEED_VERSION = 4;
+const SEED_VERSION = 5;
+const TEMPLATE_RELEASE_V5_SLUGS = new Set([
+  'template-academy',
+  'template-hotel',
+  'template-architecture',
+]);
 
 /** Shape of the settings JSON as stored by the previous (single-language) release. */
 type LegacySettings = Partial<Omit<SiteSettings, 'stats'>> & {
@@ -882,8 +887,17 @@ export class SeedService implements OnApplicationBootstrap {
         {
           key: 'template-sites-v4',
           version: 4,
+          items: TEMPLATE_PROJECTS.filter(
+            (project) =>
+              additional.has(project.slug) &&
+              !TEMPLATE_RELEASE_V5_SLUGS.has(project.slug),
+          ),
+        },
+        {
+          key: 'template-sites-v5',
+          version: 5,
           items: TEMPLATE_PROJECTS.filter((project) =>
-            additional.has(project.slug),
+            TEMPLATE_RELEASE_V5_SLUGS.has(project.slug),
           ),
         },
       ];

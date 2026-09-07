@@ -17,6 +17,7 @@ export type FormField = {
     | "select"
     | "textarea";
   placeholder?: string;
+  defaultValue?: string;
   options?: string[];
   required?: boolean;
   /** Half-width on >= sm screens. */
@@ -120,7 +121,7 @@ export function DemoForm({
             {f.type === "textarea" ? (
               <textarea {...common} rows={5} />
             ) : f.type === "select" ? (
-              <select {...common} defaultValue="">
+              <select {...common} defaultValue={f.defaultValue ?? ""}>
                 <option value="" disabled>
                   {f.placeholder ?? "—"}
                 </option>

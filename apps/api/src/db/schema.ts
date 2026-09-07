@@ -7,6 +7,7 @@ import {
   integer,
   timestamp,
   jsonb,
+  date,
 } from 'drizzle-orm/pg-core';
 
 export const users = pgTable('users', {
@@ -223,10 +224,22 @@ export const taskStages = pgTable('task_stages', {
   color: varchar('color', { length: 7 }).default('#6366F1').notNull(),
   sortOrder: integer('sort_order').default(0).notNull(),
 });
+export type TaskPriority = 'low' | 'medium' | 'high' | 'urgent';
+export type TaskChecklistItem = { id: string; text: string; done: boolean };
+
 export const tasks = pgTable('tasks', {
   id: serial('id').primaryKey(),
   title: varchar('title', { length: 200 }).notNull(),
   description: text('description').default('').notNull(),
+  priority: varchar('priority', { length: 8 })
+    .$type<TaskPriority>()
+    .default('medium')
+    .notNull(),
+  dueDate: date('due_date', { mode: 'string' }),
+  checklist: jsonb('checklist')
+    .$type<TaskChecklistItem[]>()
+    .default([])
+    .notNull(),
   stageId: integer('stage_id')
     .notNull()
     .references(() => taskStages.id, { onDelete: 'restrict' }),

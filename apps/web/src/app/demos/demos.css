@@ -437,3 +437,76 @@ html[data-demo="phones"][lang="ar"] {
   --font-d-body-face: var(--font-tajawal);
   --font-d-display-face: var(--font-tajawal);
 }
+
+/* FORMA: Bauhaus primary forms. AXIS: a restrained Swiss typographic grid. */
+html[data-demo="academy"],
+html[data-demo="architecture"],
+html[data-demo="hotel"] {
+  --font-d-body-face: var(--font-inter);
+  --font-d-display-face: var(--font-inter);
+  color-scheme: light;
+}
+html[data-demo="academy"][lang="ar"],
+html[data-demo="architecture"][lang="ar"],
+html[data-demo="hotel"][lang="ar"] {
+  --font-d-body-face: var(--font-tajawal);
+  --font-d-display-face: var(--font-tajawal);
+}
+html[data-demo="academy"] {
+  --color-d-bg: #f7f4e8;
+  --color-d-surface: #e9e8df;
+  --color-d-fg: #20211e;
+  --color-d-muted: #53564c;
+  --color-d-line: #20211e;
+  --color-d-accent: #c54029;
+  --color-d-accent-fg: #ffffff;
+}
+html[data-demo="architecture"] {
+  --color-d-bg: #f4f3ef;
+  --color-d-surface: #e4e4dc;
+  --color-d-fg: #242725;
+  --color-d-muted: #676963;
+  --color-d-line: #d3d4cc;
+  --color-d-accent: #af452b;
+  --color-d-accent-fg: #ffffff;
+}
+html[data-demo="hotel"] {
+  --color-d-bg: #f7f1e5;
+  --color-d-surface: #eee4d4;
+  --color-d-fg: #44242b;
+  --color-d-muted: #76635d;
+  --color-d-line: #d5c4ad;
+  --color-d-accent: #8b6541;
+  --color-d-accent-fg: #ffffff;
+  --font-d-display-face: var(--font-cormorant);
+}
+html[data-demo="hotel"][lang="ar"] {
+  --font-d-display-face: var(--font-amiri);
+}
+.forma-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.5rem;
+  border: 2px solid #20211e;
+  background: #20211e;
+  color: #f7f4e8;
+  padding: 1rem 1.5rem;
+  font-size: .875rem;
+  font-weight: 700;
+  box-shadow: 4px 4px 0 #ef6043;
+  transition: transform .15s;
+}
+.forma-button:hover { transform: translate(-2px, -2px); }
+.forma-poster { position: relative; border: 2px solid #20211e; box-shadow: 10px 10px 0 #20211e; transform: rotate(2deg); margin: 1rem .6rem; }
+.forma-poster-grid { display: grid; grid-template-columns: 1fr 1fr; aspect-ratio: 1.13; overflow: hidden; }
+.forma-poster-grid > div { position: relative; overflow: hidden; }
+.forma-arc { background: #ef6043; }
+.forma-arc::after { content: ''; position: absolute; inset: 20% 18% 0; border: 26px solid #20211e; border-bottom: 0; border-radius: 50% 50% 0 0; }
+.forma-star { display: grid; place-items: center; background: #efc849; }
+.forma-star svg { width: 68%; height: 68%; }
+.forma-checker { background: conic-gradient(#f7f4e8 25%, #20211e 0 50%, #f7f4e8 0 75%, #20211e 0); background-size: 50% 50%; }
+.forma-disc { background: #4267d5; }
+.forma-disc::before { content: ''; position: absolute; inset: 15%; border: 1px solid #f7f4e8; border-radius: 50%; box-shadow: 0 0 0 16px #4267d5, 0 0 0 17px #f7f4e8, 0 0 0 33px #4267d5, 0 0 0 34px #f7f4e8; }
+.forma-stamp { position: absolute; top: 39%; inset-inline-start: 36%; display: grid; place-items: center; width: 30%; aspect-ratio: 1; border: 2px solid #20211e; background: #f7f4e8; border-radius: 50%; padding: 1rem; font-size: 1rem; font-weight: 800; text-align: center; transform: rotate(-13deg); }
+html[data-demo="architecture"][lang="ar"] h1 { letter-spacing: -.035em; line-height: 1.2; }
+@media (max-width: 639px) { .forma-poster { margin: 0 .5rem; } .forma-stamp { padding: .65rem; font-size: .875rem; } }
